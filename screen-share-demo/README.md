@@ -153,15 +153,6 @@ http://localhost:5173
 
 ---
 
-# Future Improvements
-
-- Multi-user screen sharing
-- Screen share recording
-- Screen share controls
-- Better participant layouts
-
----
-
 # Screenshot
 
 <img width="882" height="421" alt="Screenshot 2026-05-18 074326" src="https://github.com/user-attachments/assets/abc3b10e-ab6c-41bb-abce-d0c440e5ecfc" />
