@@ -3,7 +3,6 @@
 A minimal React application demonstrating how to implement realtime screen sharing using the VideoSDK React SDK.
 
 This example shows how developers can:
-- Create and join meetings
 - Start screen sharing
 - Render shared screen streams in realtime
 - Use VideoSDK hooks for media stream handling
