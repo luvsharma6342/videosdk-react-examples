@@ -1,21 +1,21 @@
-# VideoSDK Screen Share Demo
+# VideoSDK Realtime Chat Demo
 
-A minimal React application demonstrating how to implement realtime screen sharing using the VideoSDK React SDK.
+A minimal React application demonstrating how to build a realtime chat system using the VideoSDK React SDK and PubSub messaging.
 
 This example shows how developers can:
-- Start screen sharing
-- Render shared screen streams in realtime
-- Use VideoSDK hooks for media stream handling
+- Send realtime chat messages
+- Receive realtime messages instantly
+- Use VideoSDK PubSub for communication between participants
 
 ---
 
 # Features
 
-- Realtime screen sharing
+- Realtime messaging
 - Dynamic meeting creation
-- Shared screen rendering
-- Responsive UI
-- Minimal and beginner-friendly implementation
+- Instant message synchronization
+- PubSub-based communication
+- Responsive and beginner-friendly UI
 
 ---
 
@@ -33,9 +33,9 @@ This example shows how developers can:
 The application first creates a VideoSDK meeting dynamically using the REST API.
 
 After joining the meeting:
-- users can start screen sharing
-- VideoSDK captures the shared screen stream
-- the shared media stream is rendered inside a `<video>` element
+- participants can send messages
+- messages are broadcasted in realtime using VideoSDK PubSub
+- all connected participants instantly receive updates
 
 The application uses:
 
@@ -43,42 +43,47 @@ The application uses:
 
 Used for:
 - joining meetings
-- enabling screen sharing
-- accessing meeting-level actions
+- accessing participant information
 
 Example:
 
 ```js
 const {
   join,
-  enableScreenShare,
+  localParticipant,
 } = useMeeting();
 ```
 
 ---
 
-## `useParticipant()`
+## `usePubSub()`
 
 Used for:
-- accessing participant media streams
-- detecting whether screen sharing is active
-- rendering shared screen video
+- publishing messages
+- subscribing to realtime events
+- receiving incoming chat messages
 
 Example:
 
 ```js
-const {
-  screenShareStream,
-  screenShareOn,
-} = useParticipant(participantId);
+const { publish } = usePubSub(
+  "CHAT",
+  {
+    onMessageReceived: (data) => {
+      console.log(data);
+    },
+  }
+);
 ```
+
+Messages are sent over the `"CHAT"` topic and automatically delivered to all connected participants.
 
 ---
 
 # Project Structure
 
 ```txt
-screen-share-demo/
+chat-demo/
 │
 ├── src/
 │   ├── App.jsx
@@ -105,7 +110,7 @@ git clone https://github.com/luvsharma6342/videosdk-react-examples.git
 ## 2. Navigate to the project
 
 ```bash
-cd screen-share-demo
+cd chat-demo
 ```
 
 ---
@@ -148,23 +153,24 @@ http://localhost:5173
 |---|---|
 | `MeetingProvider` | Provides meeting context |
 | `useMeeting()` | Meeting actions |
-| `useParticipant()` | Access participant streams |
-| `enableScreenShare()` | Starts screen sharing |
+| `usePubSub()` | Realtime messaging |
+| `publish()` | Sends chat messages |
 
 ---
 
-# Future Improvements
+# Realtime Messaging Flow
 
-- Multi-user screen sharing
-- Screen share recording
-- Screen share controls
-- Better participant layouts
+1. User joins the VideoSDK meeting
+2. User types a message
+3. Message is published using `publish()`
+4. VideoSDK PubSub broadcasts the message
+5. All participants receive the message instantly
 
 ---
 
 # Screenshot
 
-<img width="972" height="887" alt="Screenshot 2026-05-18 074559" src="https://github.com/user-attachments/assets/f1ce237e-4a99-453d-a7df-27b328a7d951" />
+<img width="972" height="887" alt="Screenshot 2026-05-18 074559" src="https://github.com/user-attachments/assets/efb4c5d2-9804-4799-9448-a7a668008b40" />
 
 
 ---
